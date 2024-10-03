@@ -1,0 +1,12 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     '/Users/henriquematheusalvespereira/Documents/Github/so-project/src/output/main'
+relocations:
+  - { offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100000C70, symSize: 0x90 }
+  - { offset: 0x3F, size: 0x8, addend: 0x0, symName: _elevator, symObjAddr: 0xEF6, symBinAddr: 0x100002008, symSize: 0x0 }
+  - { offset: 0x83, size: 0x8, addend: 0x0, symName: _building, symObjAddr: 0x1DE, symBinAddr: 0x100002000, symSize: 0x0 }
+  - { offset: 0xCE, size: 0x8, addend: 0x0, symName: _mutex, symBinAddr: 0x100002010, symSize: 0x0 }
+  - { offset: 0x122, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100000C70, symSize: 0x90 }
+  - { offset: 0x158, size: 0x8, addend: 0x0, symName: _request, symObjAddr: 0x90, symBinAddr: 0x100000D00, symSize: 0x70 }
+  - { offset: 0x180, size: 0x8, addend: 0x0, symName: _move_elevator, symObjAddr: 0x100, symBinAddr: 0x100000D70, symSize: 0xDD }
+...
