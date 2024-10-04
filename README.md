@@ -1,4 +1,9 @@
 # Simulação de Elevador
+### Integrantes
+- Vitor Alves Pereira, 10410862
+- Eduardo Takashi Missaka, 10417877
+- Tiago Silveira Lopez, 10418683
+### Descrição
 Este projeto se baseia na simulação de um elevador em um prédio de 6 andares, sendo que cada andar é considerado que pessoas estão fazendo requisições constantes do elevador. Por isso, o programa é dividido nas seguintes etapas:
 - **Duas Threads Principais:** consideramos uma thread para as pessoas que realizam a requisição do elevador em um andar e uma thread para processar o progresso do elevador até o andar de destino/chamada;
 - **Sincronização:**
