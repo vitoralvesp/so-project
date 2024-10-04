@@ -1,3 +1,15 @@
+/*
+
+PROJETO DE SISTEMAS OPERACIONAIS
+Tema: Simulação de Elevador
+---
+Integrantes:
+Vitor Alves Pereira, 10410862
+Eduardo Takashi Missaka, 10417877
+Tiago Silveira Lopez, 10418683
+
+*/
+
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
