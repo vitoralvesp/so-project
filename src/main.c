@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
-#include <semaphore.h>
 
 // Estrutura com os atributos do Elevador
 typedef struct {
@@ -30,36 +29,39 @@ pthread_mutex_t mutex;
 Elevator elevator = {0, 0};
 Building building = {6, 0};
 
-
 int main() {
 
-  pthread_t floor_thread;
-  pthread_t args_thread;
+  pthread_t elevator_call_thread; // thread da chamada do elevador
+  pthread_t elevator_thread; // thread do elevador
 
   pthread_mutex_init(&mutex, NULL);
 
   while (1) {
 
     // realiza a requisição do elevador em um andar do prédio
-    pthread_create(&floor_thread, NULL, &request, NULL);
-    pthread_join(floor_thread, NULL);
+    pthread_create(&elevator_call_thread, NULL, &request, NULL);
+    pthread_join(elevator_call_thread, NULL);
 
+    // atribui o andar de chamada ao atributo de destino do elevador
     elevator.destination_floor = building.elevator_call;
 
-    pthread_create(&args_thread, NULL, &move_elevator, NULL);
-    pthread_join(args_thread, NULL);
+    // move o elevador ao andar de destino/chamada
+    pthread_create(&elevator_thread, NULL, &move_elevator, NULL);
+    pthread_join(elevator_thread, NULL);
 
-    sleep(1);
+    sleep(10);
     
   }
 
+  // Encerrando as threads e o mutex
   pthread_mutex_destroy(&mutex);
-  pthread_exit(NULL);
+  pthread_exit((void *)&building);
+  pthread_exit((void *)&elevator);
+
   return 0;
 }
 
-// request(prédio) --> realiza a requisição do elevador em um andar gerado
-// aleatoriamente
+// request(prédio) --> realiza a requisição do elevador em um andar gerado aleatoriamente
 void *request() {
   pthread_mutex_lock(&mutex);
   short random_floor = rand() % building.floors;
@@ -71,7 +73,7 @@ void *request() {
   return NULL;
 }
 
-//
+// move_elevator() --> move o elevador para o andar chamado por meio do incremento ou decremento do atributo current_floor
 void *move_elevator() {
   pthread_mutex_lock(&mutex);
 
