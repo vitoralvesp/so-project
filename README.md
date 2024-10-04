@@ -25,6 +25,8 @@ O código implementa a lógica de concorrência através da criação de threads
 
 ### Simulação
 <img src="docs/exemplo-1.jpg" alt="Exemplo 1 de Simulação">
+<img src="docs/exemplo-2.jpg" alt="Exemplo 2 de Simulação">
+<img src="docs/exemplo-3.jpg" alt="Exemplo 3 de Simulação">
 
 ### Conclusão
 Essa documentação fornece uma visão abrangente do código, destacando as decisões de design, a lógica de concorrência e o comportamento do sistema, cumprindo, portanto, seu papel em esclarecer as funcionalidades gerais do sistema.
