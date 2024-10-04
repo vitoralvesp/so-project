@@ -45,7 +45,6 @@ int main() {
   pthread_t elevator_thread; // thread do elevador
 
   pthread_mutex_init(&mutex, NULL);
-  srand(time(NULL));
 
   while (1) {
 
@@ -75,6 +74,7 @@ int main() {
 // request(prédio) --> realiza a requisição do elevador em um andar gerado aleatoriamente
 void *request(void *args) {
   pthread_mutex_lock(&mutex);
+  srand(time(NULL));
   short random_floor = rand() % ((Building *)args)->floors; // núemros aleatórios de 0 a 6
   printf("-------------------------------------------------------\n\n");
   printf(">> Requisicao do elevador no andar %d\n", random_floor);
