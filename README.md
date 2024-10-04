@@ -3,7 +3,7 @@
 ### Integrantes
 - Vitor Alves Pereira, 10410862
 - Eduardo Takashi Missaka, 10417877
-- Tiago Silveira Lopez, 10418683
+- Tiago Silveira Lopez, 10417600
 
 ### Descrição
 Este sistema simula o funcionamento de um elevador em um prédio com 6 andares. Ele utiliza threads para gerenciar as requisições do elevador e seu movimento entre os andares. A estrutura do programa é baseada em um modelo de concorrência, onde duas threads foram criadas para processar as requisições do elevador, garantindo que o sistema funcione de maneira eficiente e responsiva.
