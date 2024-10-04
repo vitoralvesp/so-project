@@ -23,5 +23,8 @@ O código implementa a lógica de concorrência através da criação de threads
 - **Movimentação:** Após a requisição, a função move_elevator() é chamada, e o elevador começa a se mover em direção ao andar de destino, imprimindo sua posição atual até chegar ao destino.
 - **Encerramento do Programa:** O código foi implementado para que o elevador fique rodando em um loop infinito, sem definição de fim.
 
+### Simulação
+<img src="docs/exemplo-1.jpg" alt="Exemplo 1 de Simulação">
+
 ### Conclusão
 Essa documentação fornece uma visão abrangente do código, destacando as decisões de design, a lógica de concorrência e o comportamento do sistema, cumprindo, portanto, seu papel em esclarecer as funcionalidades gerais do sistema.
