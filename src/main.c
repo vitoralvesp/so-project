@@ -84,7 +84,7 @@ void *request(void *args) {
   return NULL;
 }
 
-// move_elevator() --> move o elevador para o andar chamado por meio do incremento ou decremento do atributo current_floor
+// move_elevator(elevador) --> move o elevador para o andar chamado por meio do incremento ou decremento do atributo current_floor
 void *move_elevator(void *args) {
   
   pthread_mutex_lock(&mutex);
