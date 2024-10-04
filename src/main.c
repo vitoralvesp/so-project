@@ -20,7 +20,6 @@ Tiago Silveira Lopez, 10418683
 typedef struct {
   short current_floor;
   short destination_floor;
-  short passengers_capacity;
 
 } Elevator;
 
@@ -28,13 +27,12 @@ typedef struct {
 typedef struct {
   short floors;
   short elevator_call;
-  short passengers;
 
 } Building;
 
 // Funções
-void *request();
-void *move_elevator();
+void *request(void *args);
+void *move_elevator(void *args);
 
 // Escopo Global
 pthread_mutex_t mutex;
@@ -47,21 +45,22 @@ int main() {
   pthread_t elevator_thread; // thread do elevador
 
   pthread_mutex_init(&mutex, NULL);
+  srand(time(NULL));
 
   while (1) {
 
     // realiza a requisição do elevador em um andar do prédio
-    pthread_create(&elevator_call_thread, NULL, &request, NULL);
+    pthread_create(&elevator_call_thread, NULL, &request, (void *)&building);
     pthread_join(elevator_call_thread, NULL);
 
     // atribui o andar de chamada ao atributo de destino do elevador
     elevator.destination_floor = building.elevator_call;
 
     // move o elevador ao andar de destino/chamada
-    pthread_create(&elevator_thread, NULL, &move_elevator, NULL);
+    pthread_create(&elevator_thread, NULL, &move_elevator, (void *)&elevator);
     pthread_join(elevator_thread, NULL);
 
-    sleep(10);
+    sleep(5);
     
   }
 
@@ -74,37 +73,40 @@ int main() {
 }
 
 // request(prédio) --> realiza a requisição do elevador em um andar gerado aleatoriamente
-void *request() {
+void *request(void *args) {
   pthread_mutex_lock(&mutex);
-  short random_floor = rand() % building.floors;
+  short random_floor = rand() % ((Building *)args)->floors; // núemros aleatórios de 0 a 6
   printf("-------------------------------------------------------\n\n");
-  printf(">> Requisição do elevador no andar %d\n", random_floor);
-  building.elevator_call = random_floor;
+  printf(">> Requisicao do elevador no andar %d\n", random_floor);
+  ((Building *)args)->elevator_call = random_floor; // Atualiza a chamada do elevador
   pthread_mutex_unlock(&mutex);
 
   return NULL;
 }
 
 // move_elevator() --> move o elevador para o andar chamado por meio do incremento ou decremento do atributo current_floor
-void *move_elevator() {
+void *move_elevator(void *args) {
+  
   pthread_mutex_lock(&mutex);
 
-  while(!(elevator.current_floor == elevator.destination_floor)) {
+  Elevator *elevator = (Elevator *)args;
 
-    if (elevator.current_floor < elevator.destination_floor) {
-      printf("\t- Elevador subindo...\n\t\t- Andar Atual: %hi\n\t\t- Andar de Parada: %hi\n", elevator.current_floor, elevator.destination_floor);
-      elevator.current_floor++;
+  while(!(elevator->current_floor == elevator->destination_floor)) {
+
+    if (elevator->current_floor < elevator->destination_floor) {
+      printf("\t- Elevador subindo...\n\t\t- Andar Atual: %hi\n\t\t- Andar de Parada: %hi\n", elevator->current_floor, elevator->destination_floor);
+      elevator->current_floor++;
 
     } else {
-      printf("\t- Elevador descendo...\n\t\t- Andar Atual: %hi\n\t\t- Andar de Parada: %hi\n", elevator.current_floor, elevator.destination_floor);
-      elevator.current_floor--;
+      printf("\t- Elevador descendo...\n\t\t- Andar Atual: %hi\n\t\t- Andar de Parada: %hi\n", elevator->current_floor, elevator->destination_floor);
+      elevator->current_floor--;
 
     }
     sleep(1); // 1 segundo de espera por andar
 
   }
   printf("\t- Elevador chegou ao andar de parada: andar %d\n\n",
-  elevator.current_floor);
+  elevator->current_floor);
   pthread_mutex_unlock(&mutex);
   
   return NULL;
